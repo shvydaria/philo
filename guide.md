@@ -188,3 +188,13 @@ It's a simple cycle:
 - unlock (let the next person go)
 - Repeat steps 2-4 as needed.
 - destroy (once at the very end)
+
+
+/Users/dshvydka/Documents/Documents - dshvydka’s MacBook Pro/coding/philo/atoi.c
+/Users/dshvydka/Documents/Documents - dshvydka’s MacBook Pro/coding/philo/routine.c
+/Users/dshvydka/Documents/Documents - dshvydka’s MacBook Pro/coding/philo/philo.h
+/Users/dshvydka/Documents/Documents - dshvydka’s MacBook Pro/coding/philo/utils.c
+/Users/dshvydka/Documents/Documents - dshvydka’s MacBook Pro/coding/philo/guide.md
+/Users/dshvydka/Documents/Documents - dshvydka’s MacBook Pro/coding/philo/messages.c
+/Users/dshvydka/Documents/Documents - dshvydka’s MacBook Pro/coding/philo/main.c
+/Users/dshvydka/Documents/Documents - dshvydka’s MacBook Pro/coding/philo/Makefile

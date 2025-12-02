@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dashvydk <dashvydk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dshvydka <dshvydka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 14:06:57 by dashvydk          #+#    #+#             */
-/*   Updated: 2025/11/05 12:25:06 by dashvydk         ###   ########.fr       */
+/*   Updated: 2025/12/01 22:17:59 by dshvydka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ static void	init_philosophers(t_program *prog)
 		prog->philosophers[i].eat_count = 0;
 		prog->philosophers[i].last_meal_time = prog->start_time;
 		prog->philosophers[i].prog = prog;
+		if (pthread_mutex_init(&prog->philosophers[i].meal_lock, NULL) != 0)
+			return ;
 		prog->philosophers[i].left_fork = &prog->forks[i];
 		prog->philosophers[i].right_fork = &prog->forks[(i + 1)
 			% prog->num_philo];
@@ -88,6 +90,7 @@ void	cleanup(t_program *prog)
 	while (i < prog->num_philo)
 	{
 		pthread_mutex_destroy(&prog->forks[i]);
+		pthread_mutex_destroy(&prog->philosophers[i].meal_lock);
 		i++;
 	}
 	pthread_mutex_destroy(&prog->write_lock);
