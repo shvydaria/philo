@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dashvydk <dashvydk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dshvydka <dshvydka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 11:48:58 by dashvydk          #+#    #+#             */
-/*   Updated: 2025/11/11 10:50:47 by dashvydk         ###   ########.fr       */
+/*   Updated: 2025/12/02 18:53:17 by dshvydka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,22 @@ void	*philosopher_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+	if (philo->prog->num_philo == 1)
+	{
+		print_message(philo, MSG_FORK);
+		usleep(philo->prog->time_to_die * 1000);
+		print_message(philo, MSG_DIED);
+		return (NULL);
+	}
+	philosopher_main_routine(philo);
+	return (NULL);
+}
+
+void	*philosopher_main_routine(void *philo_ptr)
+{
+	t_philo	*philo;
+
+	philo = (t_philo *)philo_ptr;
 	// Small delay for odd philosophers to prevent them all starting at once
 	if (philo->id % 2 != 0)
 		usleep(1000);
