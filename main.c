@@ -6,7 +6,7 @@
 /*   By: dshvydka <dshvydka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 11:47:43 by dashvydk          #+#    #+#             */
-/*   Updated: 2025/12/01 22:17:49 by dshvydka         ###   ########.fr       */
+/*   Updated: 2025/12/02 18:59:56 by dshvydka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,21 @@ void	monitor_simulation(t_program *prog)
 		i = 0;
 		while (i < prog->num_philo)
 		{
+			int should_stop = 0;
 			pthread_mutex_lock(&prog->philosophers[i].meal_lock);
 			if (get_time() - prog->philosophers[i].last_meal_time > prog->time_to_die)
 			{
 				print_message(&prog->philosophers[i], MSG_DIED);
 				pthread_mutex_lock(&prog->write_lock);
 				prog->is_sim_running = 0;
+				should_stop = 1;
 				pthread_mutex_unlock(&prog->write_lock);
-				pthread_mutex_unlock(&prog->philosophers[i].meal_lock);
-				return ; // Exit monitor
-			}
-			if (prog->must_eat_count != -1
+			} else if (prog->must_eat_count != -1
 				&& prog->philosophers[i].eat_count < prog->must_eat_count)
-				all_philos_are_full = 0; // At least one philo is not full
+				all_philos_are_full = 0;
 			pthread_mutex_unlock(&prog->philosophers[i].meal_lock);
+			if (should_stop)
+				return ;
 			i++;
 		}
 		if (prog->must_eat_count != -1 && all_philos_are_full)
@@ -43,7 +44,7 @@ void	monitor_simulation(t_program *prog)
 			pthread_mutex_lock(&prog->write_lock);
 			prog->is_sim_running = 0;
 			pthread_mutex_unlock(&prog->write_lock);
-			return ; // Exit monitor
+			return ;
 		}
 		usleep(1000); // Wait a bit to not burn CPU
 	}

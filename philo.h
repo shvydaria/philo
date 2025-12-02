@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dashvydk <dashvydk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dshvydka <dshvydka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 14:06:47 by dashvydk          #+#    #+#             */
-/*   Updated: 2025/11/11 10:48:59 by dashvydk         ###   ########.fr       */
+/*   Updated: 2025/12/02 19:02:22 by dshvydka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,11 @@ typedef struct s_philo
 
 int			ft_atoi(const char *str);
 long long	get_time(void);
+int	ft_strncmp	(const char *s1, const char *s2, size_t n);
 void		print_message(t_philo *philo, const char *message);
 int			init_program(t_program *prog, int argc, char **argv);
 void		cleanup(t_program *prog);
 void		*philosopher_routine(void *arg);
+void		*philosopher_main_routine(void *philo_ptr);
 
 #endif

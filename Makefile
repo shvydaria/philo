@@ -6,6 +6,7 @@ SRCS =	main.c \
 		philo.c \
 		routine.c \
 		utils.c \
+		messages.c \
 		atoi.c
 
 OBJS =	$(SRCS:.c=.o)
