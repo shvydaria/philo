@@ -17,6 +17,7 @@ else
     SANITIZER =
 endif
 # make SAN=1 for using sanitizer
+make SAN=1
 
 all: $(NAME)
 
