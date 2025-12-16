@@ -6,7 +6,7 @@
 /*   By: dshvydka <dshvydka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 12:11:29 by dashvydk          #+#    #+#             */
-/*   Updated: 2025/12/16 14:29:58 by dshvydka         ###   ########.fr       */
+/*   Updated: 2025/12/16 15:06:29 by dshvydka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,21 @@ int	is_simulation_running(t_program *prog)
 	running = prog->is_sim_running;
 	pthread_mutex_unlock(&prog->write_lock);
 	return (running);
+}
+
+int ft_usleep(size_t milliseconds, t_program *prog)
+{
+    size_t start;
+
+    start = get_time();
+    while ((get_time() - start) < milliseconds)
+    {
+        // Check if someone died while we are sleeping
+        if (!is_simulation_running(prog))
+            return (0);
+        
+        // Sleep in very short bursts (500 microseconds)
+        usleep(500); 
+    }
+    return (1);
 }
