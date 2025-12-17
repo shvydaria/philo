@@ -6,37 +6,44 @@
 /*   By: dshvydka <dshvydka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 11:47:43 by dashvydk          #+#    #+#             */
-/*   Updated: 2025/12/16 14:06:30 by dshvydka         ###   ########.fr       */
+/*   Updated: 2025/12/17 12:56:18 by dshvydka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	monitor_simulation(t_program *prog)
+static int check_philo_status(t_philo *philo, int *all_philos_are_full)
 {
-	int	i;
-	int	all_philos_are_full;
-	int	sim_should_end;
+	pthread_mutex_lock(&philo->meal_lock);
+	if (get_time() - philo->last_meal_time > philo->prog->time_to_die)
+	{
+		pthread_mutex_unlock(&philo->meal_lock);
+		return (1);
+	}
+	if (philo->prog->must_eat_count != -1
+		&& philo->eat_count < philo->prog->must_eat_count)
+		*all_philos_are_full = 0;
+	pthread_mutex_unlock(&philo->meal_lock);
+	return (0);
+}
+
+void monitor_simulation(t_program *prog)
+{
+	int i;
+	int all_philos_are_full;
 
 	while (1)
 	{
 		all_philos_are_full = 1;
-		sim_should_end = 0;
 		i = -1;
 		while (++i < prog->num_philo)
 		{
-			pthread_mutex_lock(&prog->philosophers[i].meal_lock);
-			if (get_time() - prog->philosophers[i].last_meal_time > prog->time_to_die)
+			if (check_philo_status(&prog->philosophers[i],
+					&all_philos_are_full))
 			{
 				print_message(&prog->philosophers[i], MSG_DIED);
-				sim_should_end = 1;
-			}
-			if (prog->must_eat_count != -1
-				&& prog->philosophers[i].eat_count < prog->must_eat_count)
-				all_philos_are_full = 0;
-			pthread_mutex_unlock(&prog->philosophers[i].meal_lock);
-			if (sim_should_end)
 				return ;
+			}
 		}
 		if (prog->must_eat_count != -1 && all_philos_are_full)
 		{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshvydka <dshvydka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dashvydk <dashvydk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 14:06:57 by dashvydk          #+#    #+#             */
-/*   Updated: 2025/12/01 22:17:59 by dshvydka         ###   ########.fr       */
+/*   Updated: 2025/12/17 12:25:00 by dashvydk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	init_program(t_program *prog, int argc, char **argv)
 		|| prog->time_to_sleep <= 0 || (argc == 6 && prog->must_eat_count <= 0))
 		return (printf("Error: Invalid arguments\n"), 1);
 	prog->is_sim_running = 1;
-	prog->start_time = get_time(); // "birth" moment of simulation
+	prog->start_time = get_time();
 	prog->philosophers = malloc(sizeof(t_philo) * prog->num_philo);
 	if (!prog->philosophers)
 		return (1);
@@ -78,7 +78,7 @@ int	init_program(t_program *prog, int argc, char **argv)
 
 void	cleanup(t_program *prog)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < prog->num_philo)

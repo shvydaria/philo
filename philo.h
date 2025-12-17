@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshvydka <dshvydka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dashvydk <dashvydk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 14:06:47 by dashvydk          #+#    #+#             */
-/*   Updated: 2025/12/16 15:02:11 by dshvydka         ###   ########.fr       */
+/*   Updated: 2025/12/17 12:19:56 by dashvydk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@ typedef struct s_program
 	int time_to_die;      // Time limits from arguments
 	int		time_to_eat;
 	int		time_to_sleep;
-	int must_eat_count;// Optional argument: number_of_times_each_philosopher_must_eat
-	int is_sim_running;// Flag to stop the simulation (0 for stop, 1 for running)
-	pthread_mutex_t write_lock;// Mutex to ensure logs don't overlap (A MUST!)
+	int must_eat_count;          // Optional argument: number_of_times_each_philosopher_must_eat
+	int is_sim_running;           // Flag to stop the simulation (0 for stop, 1 for running)
+	pthread_mutex_t write_lock;  
+		// Mutex to ensure logs don't overlap (A MUST!)
 	pthread_mutex_t *forks;       // Array of all fork mutexes
 	struct s_philo *philosophers; // Array of all philosopher structs
 }			t_program;
@@ -47,12 +48,15 @@ typedef struct s_philo
 {
 	int id;                      // Philosopher ID (1 to num_philo)
 	int eat_count;               // How many times this philo has eaten
-	long long last_meal_time;   // Timestamp of the last time this philo finished eating
+	long long last_meal_time;   
+		// Timestamp of the last time this philo finished eating
 	pthread_t thread;            // The philo's thread handle
-	t_program *prog;            // Pointer back to the main simulation structure
+	t_program *prog;            
+		// Pointer back to the main simulation structure
 	pthread_mutex_t *left_fork;  // Pointer to their left fork's mutex
 	pthread_mutex_t *right_fork; // Pointer to their right fork's mutex
-	pthread_mutex_t meal_lock;  // Mutex to protect last_meal_time and eat_count
+	pthread_mutex_t meal_lock;  
+		// Mutex to protect last_meal_time and eat_count
 }			t_philo;
 
 // utils
@@ -60,7 +64,7 @@ int			ft_atoi(const char *str);
 long long	get_time(void);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 int			is_simulation_running(t_program *prog);
-int 		ft_usleep(size_t milliseconds, t_program *prog);
+int			ft_usleep(size_t milliseconds, t_program *prog);
 // messages
 void		print_message(t_philo *philo, const char *message);
 // routine

@@ -1,6 +1,4 @@
-# 🎓 Evaluation Prep: The Walkthrough
-
-Here is how to explain your project during the evaluation, file by file.
+# 🎓 The Walkthrough
 
 ---
 
@@ -97,12 +95,6 @@ Here is how to explain your project during the evaluation, file by file.
 
 ---
 
-# How to explain the project (For Beginners)
-
-## 🥢 Welcome them:
-
-> "Hi everyone! Let me tell you about a project I worked on. It’s called ‘Philo,’ and it’s inspired by an old thought experiment about philosophers and dining. Pretty cool, right?"
-
 ## 🔒 Introduce mutexes as table rules:
 
 > "To solve this, I use something called a **mutex**. Think of a mutex as an agreed-upon set of table rules: a philosopher can only pick up a fork if the rule says it's available. This prevents arguments or two philosophers grabbing the same fork at once."
@@ -122,3 +114,4 @@ Here is how to explain your project during the evaluation, file by file.
 ## 👨‍💻 Wrap it up with the big picture:
 
 > "This project isn’t just about dining philosophers—it’s an example of how computers manage complicated tasks when multiple programs want the same resources. By solving these kinds of challenges, we make sure systems run efficiently and without errors."
+
