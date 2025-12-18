@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dashvydk <dashvydk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dshvydka <dshvydka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 11:48:58 by dashvydk          #+#    #+#             */
-/*   Updated: 2025/12/17 12:20:47 by dashvydk         ###   ########.fr       */
+/*   Updated: 2025/12/18 13:45:46 by dshvydka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	*philosopher_main_routine(void *philo_ptr)
 		ft_usleep(philo->prog->time_to_sleep, philo->prog);
 		print_message(philo, MSG_THINK);
 		if (philo->prog->num_philo % 2 != 0)
-			ft_usleep(10, philo->prog);
+			ft_usleep(philo->prog->time_to_eat, philo->prog);
 	}
 	return (NULL);
 }
